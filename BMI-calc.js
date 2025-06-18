@@ -1,58 +1,57 @@
 let Height = document.querySelector('.js-height');
 let Weight = document.querySelector('.js-weight');
 let toggelbutton = document.querySelector('.js-toggle')
-const saveUnits = localStorage.getItem('bmiUnit')
-let units = true
-if(saveUnits === null){
-  units = true
-}else if(saveUnits === 'true'){
-  units = true
-}else if(saveUnits === 'false'){
-units = false
-}
-updatePlaceholder();  
-toggelbutton.textContent = units ? 'Kg/meters' : 'lb/inches'; 
+let calculation = document.querySelector('.js-result')
+let units = ["metric","imperial","cm_kg"]; 
+let unitsIndex = 0
 
-function toggelButton(){
-  units = !units
-  localStorage.setItem('bmiUnit',units)
-  
-  if(!units){
-  toggelbutton.textContent = 'lb/inches'
- 
+function toggel(){
+  unitsIndex = unitsIndex + 1;
+  if(unitsIndex>2){
+    unitsIndex = 0
   } 
-
-  if(units){
-     toggelbutton.textContent = 'Kg/meters'
-  
+toggelbutton.textContent = units[unitsIndex]
+updateUi()
+}
+function updateUi(){
+  if(
+    unitsIndex === 0){
+    Height.placeholder = "Enter height in meters";
+    Weight.placeholder = "Enter weight in Kg"
+  }else if(
+    unitsIndex === 1
+  ){
+   Height.placeholder = "Enter height in inches";
+   Weight.placeholder = "Enter weight in lbs"
+  }else if(
+    unitsIndex === 2
+  ){
+    Height.placeholder = "Enter height in cm";
+    Weight.placeholder = "Enter weight in Kg"
   }
-  updatePlaceholder()
 }
-function updatePlaceholder(){
-if(units){
-  Height.placeholder = "Enter height in meters"
-  Weight.placeholder = "Enter weight in Kg"
-} 
-if(!units){
-  Height.placeholder = "Enter height in inches"
-  Weight.placeholder = "Enter weight in lbs"
-}
-}
-
 function calculate(){
-  let heightValue = parseFloat(Height.value) 
-  let weightValue = parseFloat(Weight.value)
-  let heightInMeters;
-  let weightInkilo;
-  if(!units){
-    heightInMeters = heightValue * 0.0254;
-    weightInkilo = weightValue * 0.453592;
+  let heightInMeters,weightInKilo;
+  let result;
+  if(
+    unitsIndex === 0
+  ){
+   heightInMeters = Height.value;
+   weightInKilo  = Weight.value;
   }
-  if(units){
-    heightInMeters = heightValue;
-    weightInkilo = weightValue;
+  if(
+    unitsIndex === 1
+  ){
+   heightInMeters = Height.value*0.0254
+   weightInKilo  = Weight.value*0.4536
   }
-
- let result = weightInkilo/(heightInMeters * heightInMeters)
-  document.querySelector('.js-result').innerHTML = result.toFixed(2)
+  if(
+    unitsIndex ===2
+  ){
+  heightInMeters = Height.value/100
+   weightInKilo  = Weight.value
+  }
+  result = weightInKilo/(heightInMeters*heightInMeters)
+  calculation.innerHTML = result.toFixed(2);
 } 
+updateUi()
