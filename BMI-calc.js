@@ -76,7 +76,7 @@ function calculate(){
   let converted = units[unitsIndex].convert(H,W)
   heightInMeters = converted.heightInMeters;
   weightInKilo = converted.weightInKilo;
-
+ //previos logic
   // if(
   //   unitsIndex === 0
   // ){
