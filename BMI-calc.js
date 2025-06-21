@@ -68,14 +68,13 @@ function updateUi(){
 //   }
 // }
 function calculate(){
-  let heightInMeters,weightInKilo;
+  // let heightInMeters,weightInKilo;
   let H = Height.value;
   let W = Weight.value;  
   let result;
 
   let converted = units[unitsIndex].convert(H,W)
-  heightInMeters = converted.heightInMeters;
-  weightInKilo = converted.weightInKilo;
+  let {heightInMeters,weightInKilo} = converted
  //previos logic
   // if(
   //   unitsIndex === 0
