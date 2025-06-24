@@ -44,7 +44,8 @@ function toggel(){
     unitsIndex = 0
   } 
 toggelbutton.textContent = units[unitsIndex].name
-updateUi()
+updateUi() 
+calculate()
 }
 function updateUi(){
   Height.placeholder = units[unitsIndex].heightPlaceholder
