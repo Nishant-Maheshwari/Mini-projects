@@ -10,23 +10,23 @@ let playGame = true
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 let playerGuessHistory = [];
-
+if(playGame){
 submitbtn.addEventListener('click', conclusion)
 function conclusion(){
   let guess = Number(userGuess.value);
  validateGuess(guess)
   playerGuessHistory.push(guess)
   console.log(playerGuessHistory);
-}
+}}
 function validateGuess(guess){
 if(isNaN(guess)){
-  result.innerHTML = "Enter a number"
+  printMessage("Enter a number") 
 }else if(guess < 1){
-  result.innerHTML = "Enter a number greatear than zero"
+  printMessage("Enter a number greatear than zero") 
 }else if(guess > 100){
- result.innerHTML = "Enter a number lesser than 101"
+ printMessage("Enter a number lesser than 101") 
 }else if(playerGuessHistory.includes(guess)){
-result.innerHTML = "You have guessed this number before"
+printMessage("You have guessed this number before") 
 }
 else{
 compare(guess)
@@ -35,16 +35,16 @@ compare(guess)
 function compare(guess){
 if(chancesInNumber > 0){
 if(guess === randomNumber){
-  result.innerHTML = `congrats! you won , the number is ${randomNumber} `
+  printMessage(`congrats! you won , the number is ${randomNumber} `) 
 }else{
-result.innerHTML = `Wrong number! try again`
+printMessage(`Wrong number! try again`) 
 prevGuess.innerHTML += `${guess} `
 chancesInNumber--
 hint(guess)
 chancesLeft.innerHTML = `chances left = ${chancesInNumber}`
 }
-}else if(guess === 0){
-  result.innerHTML = `all chances are gone. the number is ${randomNumber}`
+}else if(chancesInNumber === 0){
+  printMessage(`all chances are gone. the number is ${randomNumber}`) 
   
 }
 } 
@@ -53,15 +53,17 @@ chancesLeft.innerHTML = `chances left = ${chancesInNumber}`
 function hint(guess){
   if(chancesInNumber < 5)
   if(guess > randomNumber){
- result.innerHTML = `hint : the number u guessed is greater `
+ printMessage(`hint : the number u guessed is greater `) 
   }else if (
     guess < randomNumber
   ){
-     result.innerHTML = `hint : the number u guessed is samller `
+     printMessage(`hint : the number u guessed is samller `) 
   }
 }
 
-
+function printMessage(message){
+result.innerHTML = message
+} 
 
 
 
