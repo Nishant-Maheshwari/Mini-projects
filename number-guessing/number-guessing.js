@@ -52,7 +52,8 @@ chancesLeft.innerHTML = `chances left = ${chancesInNumber}`
 }
 }else if(chancesInNumber === 0){
   printMessage(`all chances are gone. the number is ${randomNumber}`) 
-  
+  gameOver()
+
 }
 } 
 
@@ -84,11 +85,31 @@ console.log(randomNumber);
   <div class="prevGuess"></div>
   <div class="js-chances">chances left = 10</div>
   <div class="js-result"></div>` 
+
+  //selectors//
+ wholeGame = document.querySelector('.js-game')
+ userGuess = document.querySelector('.js-guess')
+ chancesLeft = document.querySelector('.js-chances')
+ result = document.querySelector('.js-result') 
+ prevGuess = document.querySelector('.prevGuess')
+ submitbtn = document.querySelector('.js-submit')
+ resetBtn = document.querySelector('.js-reset')
   chancesInNumber = 10;
   userGuess.value = ''
+  playGame = true
+  submitbtn.addEventListener('click', conclusion)
+  resetBtn.addEventListener('click', reset)
 }
 
-
+function gameOver(){
+  const br = document.createElement('br');
+  const tryAgainBtn = document.createElement('button');
+  tryAgainBtn.innerHTML = "try again"
+  tryAgainBtn.addEventListener('click',reset)
+  result.appendChild(br);
+  result.appendChild(tryAgainBtn)
+ 
+}
 
 
 // let chancesInNumber = 10
