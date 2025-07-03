@@ -1,9 +1,11 @@
 //selectors//
+let wholeGame = document.querySelector('.js-game')
 let userGuess = document.querySelector('.js-guess')
 let chancesLeft = document.querySelector('.js-chances')
 let result = document.querySelector('.js-result') 
 let prevGuess = document.querySelector('.prevGuess')
 let submitbtn = document.querySelector('.js-submit')
+let resetBtn = document.querySelector('.js-reset')
 /////
 let chancesInNumber = 10;
 let playGame = true
@@ -11,13 +13,18 @@ let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 let playerGuessHistory = [];
 if(playGame){
+ 
 submitbtn.addEventListener('click', conclusion)
 function conclusion(){
   let guess = Number(userGuess.value);
  validateGuess(guess)
   playerGuessHistory.push(guess)
   console.log(playerGuessHistory);
-}}
+}}else{
+
+}
+
+
 function validateGuess(guess){
 if(isNaN(guess)){
   printMessage("Enter a number") 
@@ -62,9 +69,24 @@ function hint(guess){
 }
 
 function printMessage(message){
-result.innerHTML = message
+result.innerHTML = message;
+userGuess.value = ''
 } 
+resetBtn.addEventListener('click', reset)
 
+function reset(){
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+console.log(randomNumber);
+  wholeGame.innerHTML = `<h1>Guess the Number</h1>
+  <input class="js-guess" type="number", placeholder="guess the number">
+  <button class="js-submit">submit</button>
+  <button class="js-reset">Reset</button>
+  <div class="prevGuess"></div>
+  <div class="js-chances">chances left = 10</div>
+  <div class="js-result"></div>` 
+  chancesInNumber = 10;
+  userGuess.value = ''
+}
 
 
 
