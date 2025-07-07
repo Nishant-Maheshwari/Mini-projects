@@ -50,7 +50,7 @@ chancesInNumber--
 hint(guess)
 chancesLeft.innerHTML = `chances left = ${chancesInNumber}`
 }
-}else if(chancesInNumber === 0){
+}else if(chancesInNumber < 2){
   printMessage(`all chances are gone. the number is ${randomNumber}`) 
   gameOver()
 
@@ -96,6 +96,7 @@ console.log(randomNumber);
  resetBtn = document.querySelector('.js-reset')
   chancesInNumber = 10;
   userGuess.value = ''
+  playerGuessHistory = []
   playGame = true
   submitbtn.addEventListener('click', conclusion)
   resetBtn.addEventListener('click', reset)
